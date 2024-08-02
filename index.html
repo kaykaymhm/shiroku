@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Downloads</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #2b2b2b 0%, #1e1e1e 100%);
+            margin: 0;
+            padding: 0;
+            overflow-y: auto; /* Allow vertical scrolling */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+            cursor: url('/Custom Cursor.png'), auto; /* Replace with your cursor URL */
+            animation: fadeInPage 2s ease-out; /* Page fade-in animation */
+        }
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        h1 {
+            font-size: 4rem;
+            margin: 20px 0;
+            color: #d0a8e0;
+            animation: slideIn 1.5s ease-out, glow 1.5s ease-in-out infinite alternate;
+            text-shadow: 0 0 3px #d0a8e0, 0 0 8px #d0a8e0;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 3px #d0a8e0, 0 0 8px #d0a8e0;
+            }
+            to {
+                text-shadow: 0 0 8px #d0a8e0, 0 0 15px #d0a8e0;
+            }
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            gap: 20px;
+            z-index: 1;
+            margin-top: 80px; /* Adjust margin to ensure space for header */
+        }
+        .section {
+            flex: 1 1 calc(33.333% - 40px);
+            background: rgba(40, 40, 40, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+        .section:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            background: rgba(50, 50, 50, 0.9);
+        }
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d0a8e0;
+            transition: color 0.3s ease;
+        }
+        h2:hover {
+            color: #e5c7f3;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        .download-link {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 5px 0;
+            background: linear-gradient(135deg, #d0a8e0 0%, #c78bd4 100%);
+            color: #1e1e1e;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease, background 0.3s ease, color 0.3s ease;
+        }
+        .download-link:hover {
+            background: linear-gradient(135deg, #e5c7f3 0%, #d0a8e0 100%);
+            color: #1e1e1e;
+            transform: scale(1.08);
+            border-color: #e5c7f3;
+        }
+        .download-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 0;
+        }
+        .download-link:hover::before {
+            opacity: 1;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #d0a8e0 0%, #c78bd4 100%);
+            color: #1e1e1e;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease, background 0.3s ease, color 0.3s ease;
+            z-index: 10;
+        }
+        .back-button:hover {
+            background: linear-gradient(135deg, #e5c7f3 0%, #d0a8e0 100%);
+            color: #1e1e1e;
+            transform: scale(1.08);
+            border-color: #e5c7f3;
+        }
+        .password, .credits, .discord-server {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .discord-server p {
+            background: rgba(50, 50, 50, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #d0a8e0;
+        }
+        .discord-server a {
+            color: #d0a8e0;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .discord-server a:hover {
+            color: #e5c7f3;
+        }
+        .script-box {
+            background: rgba(50, 50, 50, 0.8);
+            border: 2px solid #d0a8e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            position: relative;
+            animation: fadeIn 1.5s ease-out;
+        }
+        .script-box pre {
+            white-space: pre-wrap;
+            color: #e0e0e0;
+            margin: 0;
+        }
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #d0a8e0;
+            color: #1e1e1e;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+        .copy-button:hover {
+            background: #1e1e1e;
+            color: #d0a8e0;
+        }
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .notification {
+            background: rgba(50, 50, 50, 0.9);
+            border: 2px solid #d0a8e0;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            max-width: 400px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .notification button {
+            background: #d0a8e0;
+            color: #1e1e1e;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+        .notification button:hover {
+            background: #1e1e1e;
+            color: #d0a8e0;
+        }
+        .copy-notification {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(50, 50, 50, 0.8);
+            color: #d0a8e0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+            display: none;
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .copy-notification.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .copy-notification.hide {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            var audio = new Audio('Punchmade Dev - How To Write A Dump (Official Music Video) [TubeRipper.com].mp3');
+            var isPlaying = false;
+            var notificationOverlay = document.querySelector('.notification-overlay');
+            var copyNotification = document.querySelector('.copy-notification');
+
+            function showNotification() {
+                notificationOverlay.style.display = 'flex';
+            }
+
+            function handleMusicChoice(choice) {
+                if (choice === 'yes') {
+                    audio.play().then(() => {
+                        audio.loop = true;
+                    }).catch(error => {
+                        console.error('Audio play failed:', error);
+                    });
+                    isPlaying = true;
+                } else {
+                    audio.pause();
+                    isPlaying = false;
+                }
+                notificationOverlay.style.display = 'none';
+            }
+
+            document.getElementById('music-yes').addEventListener('click', function() {
+                handleMusicChoice('yes');
+            });
+
+            document.getElementById('music-no').addEventListener('click', function() {
+                handleMusicChoice('no');
+            });
+
+            showNotification();
+
+            // Copy to clipboard functionality
+            document.querySelectorAll('.copy-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    var scriptBox = button.closest('.script-box');
+                    var scriptText = scriptBox.querySelector('pre').innerText;
+                    navigator.clipboard.writeText(scriptText).then(() => {
+                        copyNotification.classList.remove('hide');
+                        copyNotification.classList.add('show');
+                        setTimeout(() => {
+                            copyNotification.classList.remove('show');
+                            copyNotification.classList.add('hide');
+                        }, 2000); // Notification duration
+                    }).catch(err => {
+                        alert('Failed to copy script: ', err);
+                    });
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop>
+            <source src="background-video.mp4" type="video/mp4"> <!-- Replace with your video path -->
+        </video>
+    </div>
+
+    <a href="Games.html" class="back-button">Play Games</a>
+
+    <h1>Ultimate Downloads</h1>
+
+    <div class="container">
+        <div class="section" id="software">
+            <h2>Software</h2>
+            <ul>
+                <li><a class="download-link" href="https://gofile.io/d/qjyf8S" target="_blank">Crosshair X</a></li>
+                <li><p class="password">Enjoy Leaks Posting More Soon</p></li>
+            </ul>
+        </div>
+
+        <div class="section" id="websites">
+            <h2>Websites</h2>
+            <ul>
+                <li><p class="download-link">None Currently</p></li>
+            </ul>
+        </div>
+
+        <div class="section" id="roblox-scripts">
+            <h2>Roblox Scripts</h2>
+            <div class="script-box">
+                <button class="copy-button">Copy Text</button>
+                <h3>Blade Ball Auto Parry</h3>
+                <pre>
+xpcall(function()
+loadstring(game:HttpGet("https://github.com/example/BladeBall.lua?raw=true"))()
+end,function()
+warn("Script error!")
+end)
+                </pre>
+            </div>
+            <div class="script-box">
+                <button class="copy-button">Copy Text</button>
+                <h3>Universal made by Criminal</h3>
+                <pre>
+loadstring(game:HttpGet("https://pastefy.app/HL5LXg1u"))()
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="discord-server">
+        <p>Join our Discord server: <a href="https://discord.gg/idapro" target="_blank">Discord Server</a></p>
+    </div>
+    <div class="credits">
+        <p>Credits: Criminal_0001</p>
+        <p>If you install something, please make a vouch on Discord. Thank you!</p>
+    </div>
+
+    <div class="notification-overlay">
+        <div class="notification">
+            <p>Do you want music to be played while you browse?</p>
+            <button id="music-yes">Yes</button>
+            <button id="music-no">No</button>
+        </div>
+    </div>
+
+    <div class="copy-notification hide">
+        <p>Text copied to clipboard!</p>
+    </div>
+</body>
+</html>
